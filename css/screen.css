@@ -50,6 +50,12 @@ body {
  * Customize the background color to match your design.
  */
 
+ ::-moz-selection {
+     background: #00E6A1;
+     color: white;
+     text-shadow: none;
+ }
+
 ::selection {
     background: #00E6A1;
     color: white;
@@ -176,7 +182,12 @@ a:focus {
 
 /* Small devices (landscape phones, 576px and up) */
 
-@media (min-width: 576px) {}
+@media (min-width: 576px) {
+    h1 {
+        font-size: 46px;
+        line-height: 56px;
+    }
+}
 
 /* Medium devices (tablets, 768px and up) */
 
@@ -192,11 +203,21 @@ a:focus {
 
 /* Large devices (landscape tablets, desktops, 992px and up) */
 
-@media (min-width: 992px) {}
+@media (min-width: 992px) {
+    h1 {
+        font-size: 52px;
+        line-height: 64px;
+    }
+}
 
 /* Extra large devices (large desktops, 1200px and up) */
 
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+    h1 {
+        font-size: 58px;
+        line-height: 64px;
+    }
+}
 
 /*
     Components: Author
@@ -205,6 +226,7 @@ a:focus {
 .c-author {
     display: flex;
     align-items: center;
+    margin-bottom: 24px;
 }
 
 .c-author__image {
@@ -214,32 +236,50 @@ a:focus {
     margin-right: 16px;
 }
 
+.c-author__caption {
+    padding-top: 0;
+}
+
 .c-author__name,
 .c-author__meta {
     margin-bottom: 0;
-}
-
-.c-author__meta {
-    font-size: 14px;
-    font-family: "Inter", "Helvetica Neue", Helvetica, arial, sans-serif;
-    line-height: 24px;
 }
 
 .c-author__name {
     font-size: 16px;
     line-height: 24px;
 }
+.c-author__meta {
+    font-size: 14px;
+    font-family: "Inter", "Helvetica Neue", Helvetica, arial, sans-serif;
+    line-height: 24px;
+}
+
+@media (min-width: 992px){
+    .c-author {
+        display: block;
+    }
+    .c-author__image {
+        margin-bottom: 16px;
+    }
+}
 
 /*
     Components: Article
 */
 
-.c-article__header,
-.c-article__body {
+.c-article__header {
     max-width: 1200px;
     margin: 0 auto;
+    font-size: 16px;
+    /* display: flex;
+    flex-direction: column; */
+    display: flow-root;
 }
-
+.c-article__body {
+    max-width: calc(36em + 96px);
+    margin: 0 auto;
+}
 .c-article__header {
     padding: 24px 24px 0;
 }
@@ -249,19 +289,11 @@ a:focus {
 }
 
 .c-article__date {
-    color: #5C6366;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 8px;
 }
 
-h1 { /*sizing nog toevoegen*/
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.c-quote {
-    padding: 24px;
-    color: #00B37D;
-    background-color: #CFE6DE;
-}
 @media (min-width: 768px) {
     .c-article__header {
         padding: 48px 48px 24px;
@@ -275,10 +307,10 @@ h1 { /*sizing nog toevoegen*/
 }
 
 @media (min-width: 992px) {
-    .c-article__header{
-        display: block;
-    }
     .c-article__body {
+        max-width: 1200px;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
         flex-wrap: wrap;
     }
@@ -286,17 +318,29 @@ h1 { /*sizing nog toevoegen*/
         width: 25%;
         padding-right: 24px;
     }
-
-    
     .c-article__content {
         width: 75%;
     }
-    .c-author{
-        display: block;
-    }
-    .c-author__image {
-        margin-bottom: 16px;
-    }
+}
+
+/*
+    Components: Quote
+*/
+
+.c-quote {
+    margin: 48px -24px;
+    padding: 24px;
+    color: #00B37D;
+    background-color: #F2FAF8;
+    /* border: 1px solid #B3FFE8; */
+}
+/*
+    Scope: Content
+    Specific behaviour inside s-content class
+*/
+
+.s-content * + h2 {
+    margin-top: 48px;
 }
 
 /*
@@ -309,6 +353,29 @@ h1 { /*sizing nog toevoegen*/
     max-width: 36em;
 }
 
+/*
+    Media Queries
+    ---
+    EXAMPLE Media Queries for Responsive Design.
+    These examples override the primary ('mobile first') styles.
+    Modify as content requires.
+*/
+
+/* Small devices (landscape phones, 576px and up) */
+
+@media (min-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {}
+
+/* Large devices (landscape tablets, desktops, 992px and up) */
+
+@media (min-width: 992px) {}
+
+/* Extra large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {}
 
 /*
     Print styles.
@@ -323,8 +390,7 @@ h1 { /*sizing nog toevoegen*/
     *:after {
         background: transparent !important;
         color: #000 !important;
-        /* Black prints faster:
-                                   http://www.sanbeiji.com/archives/953 */
+        /* Black prints faster:http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;
     }
